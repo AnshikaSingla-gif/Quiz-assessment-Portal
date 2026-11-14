@@ -10,7 +10,13 @@ class Boundary extends React.Component {
 }
 const Ctx = createContext();
 const useAuth = () => useContext(Ctx);
-const err = (e) => e.response?.data?.error || 'Something went wrong. Please try again.';
+const err = (e) => {
+  const data = e.response?.data, detail = data?.error;
+  if (typeof detail === 'string') return detail;
+  if (typeof detail?.message === 'string') return detail.message;
+  if (typeof data?.message === 'string') return data.message;
+  return 'Something went wrong. Please try again.';
+};
 const card = 'bg-white rounded-2xl border border-slate-200 p-6 shadow-sm';
 const btn = 'bg-indigo-600 hover:bg-indigo-700 text-white rounded-xl px-5 py-2.5 font-semibold shadow-sm disabled:opacity-50 transition';
 const ghost = 'border border-slate-300 bg-white text-slate-700 hover:bg-slate-50 rounded-xl px-5 py-2.5 font-semibold transition';
