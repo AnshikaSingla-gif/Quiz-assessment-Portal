@@ -28,7 +28,7 @@ POST /api/attempts/start, GET /api/attempts, GET /api/attempts/:id, POST /api/at
 GET /api/dashboard/stats · POST /api/tutor/chat
 
 ## Deploy
-Render (server, root `server`, build `npm install`, start `npm start`) with the same env vars, `CLIENT_URL` = your Vercel URL. Vercel (client, root `client`, build `npm run build`, output `dist`) with `VITE_API_URL` = `https://<render-app>/api`. Use MongoDB Atlas (allow Render's IPs).
+Deploy this repository to Vercel from the repository root. The root `vercel.json` builds the Vite client and Express server as services, routes `/api/*` to the server, and sends client-side routes to the SPA entrypoint. Configure `JWT_SECRET` and a reachable production `MONGODB_URI` (for example, MongoDB Atlas) in the Vercel project environment; `GEMINI_API_KEY` is optional. Do not use the local MongoDB or in-memory fallback in production. Redeploy after changing environment variables.
 
 ## Not done yet
 Analytics page, profile/password page, tutor history saving, history search/filters, automated tests, SPA rewrite config for Vercel.
